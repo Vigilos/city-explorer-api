@@ -1,7 +1,7 @@
 # City Explorer API
 
 **Author**: Chris Fanucchi
-**Version**: 1.0.0
+**Version**: 1.1.0
 
 ## Overview
 
@@ -30,5 +30,5 @@ Erik Dodd - Worked with Erik on initial http request process flowchart.
 Name of feature: Initial setup and coding
 Estimate of time needed to complete: 2.5 hours
 Start time: 14:45
-Finish time:
-Actual time needed to complete:
+Finish time: 16:45
+Actual time needed to complete: 2 hours
