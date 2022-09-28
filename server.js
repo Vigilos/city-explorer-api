@@ -6,8 +6,11 @@ require('dotenv').config();
 const express = require('express');
 // Allows for cross origin resource sharing
 const cors = require('cors');
-// Load data
-const data = require('./data/weather.json');
+
+const axios = require('axios');
+
+const { response } = require('express');
+
 //Start Express Server
 const app = express();
 
@@ -15,31 +18,33 @@ const app = express();
 app.use(cors());
 
 // Declare port
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 // Listening for connection
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
 // Endpoints
-app.get('/weather', (req, res) => {
+app.get('/weather', getWeather);
+
+async function getWeather(req, res) {
+  const url = process.env.REACT_APP_API_URL;
+
   try {
-    let foundData = data.find(
-      city =>
-        city.city_name.toLowerCase() == req.query.searchQuery.toLowerCase()
-      // &&
-      // city.lat == req.query.lat &&
-      // city.lon == req.query.lon
-    );
-    if (!foundData) {
-      foundData.data = false;
-      console.log('Search criteria not found in data!');
-    }
-    res.send(ParseData(foundData.data));
+    const foundData = await axios.get(url, {
+      params: {
+        key: process.env.WEATHER_API_KEY,
+        lat: req.query.lat,
+        lon: req.query.lon,
+      },
+    });
+    res.status(200).send(ParseData(foundData.data));
   } catch (error) {
-    console.log('Query failed!');
-    res.send([{ Code: 500, Message: `${error.message}` }]);
+    console.log(`Query failed! ${error.message}`);
+    res
+      .status(500)
+      .send(`Error occurred on server: ${error.code} - ${error.message}`);
   }
-});
+}
 
 class Forecast {
   constructor(date, description) {
@@ -49,14 +54,11 @@ class Forecast {
 }
 
 const ParseData = data => {
-  let cityWeather = [];
-  data.forEach(item => {
-    cityWeather.push(
+  return data.data.map(
+    weather =>
       new Forecast(
-        item.valid_date,
-        `Low of ${item.low_temp}, high of ${item.high_temp} with ${item.weather.description}`
+        weather.valid_date,
+        `Low of ${weather.low_temp}, high of ${weather.high_temp} with ${weather.weather.description}`
       )
-    );
-  });
-  return cityWeather;
+  );
 };
