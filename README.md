@@ -38,5 +38,5 @@ Worked with Mehtab Riar, Erik Dobb, and Ian Forrester on http request cycle proc
 2. Name of feature: Get API weather data from external server
    Estimate of time needed to complete: 1.5 hours
    Start time: 15:30
-   Finish time:
-   Actual time needed to complete:
+   Finish time: 17:00
+   Actual time needed to complete: 1.5 hours
