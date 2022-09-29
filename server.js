@@ -38,7 +38,7 @@ async function getWeather(req, res) {
         lon: req.query.lon,
       },
     });
-    res.status(200).send(ParseData(foundData.data), 'weather');
+    res.status(200).send(ParseData(foundData.data, 'weather'));
   } catch (error) {
     console.log(`Query failed! ${error.message}`);
     res
