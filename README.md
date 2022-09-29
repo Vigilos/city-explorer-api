@@ -1,7 +1,7 @@
 # City Explorer API
 
 **Author**: Chris Fanucchi
-**Version**: 1.2.0
+**Version**: 1.3.0
 
 ## Overview
 
@@ -40,3 +40,9 @@ Worked with Mehtab Riar, Erik Dobb, and Ian Forrester on http request cycle proc
    Start time: 15:30
    Finish time: 17:00
    Actual time needed to complete: 1.5 hours
+
+3. Name of feature: Modularize retrieving weather and movies data
+   Estimate of time needed to complete: 1 hour
+   Start time: 12:45
+   Finish time: 13:15
+   Actual time needed to complete: 0.5 hours
